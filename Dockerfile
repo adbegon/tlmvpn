@@ -10,7 +10,7 @@ ENV BUILD_DEPENDENCIES g++ git scons libssl-dev libboost-system-dev  libboost-th
 # Get FreeLAN sources
 # Compile FreeLAN
 # Remove sources and dependencies
-ENV FREELAN_BRANCH master CXX=g++
+ENV FREELAN_BRANCH=master CXX=g++
 WORKDIR /opt/
 
 RUN apt-get install -y $DEPENDENCIES $BUILD_DEPENDENCIES && \
