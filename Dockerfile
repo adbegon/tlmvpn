@@ -16,7 +16,6 @@ WORKDIR /opt/
 RUN apt-get install -y $DEPENDENCIES $BUILD_DEPENDENCIES && \
     git clone https://github.com/freelan-developers/freelan.git /opt/freelan &&\
     cd /opt/freelan && git checkout $FREELAN_BRANCH &&\
-    apt-get autoclean &&\
     cd /opt/freelan && scons install prefix=/usr/ &&\
     rm -rf /opt/freelan &&\
     apt-get autoremove -y --purge $BUILD_DEPENDENCIES &&\
