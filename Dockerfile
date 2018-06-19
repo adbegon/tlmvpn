@@ -14,7 +14,7 @@ ENV BUILD_DEPENDENCIES scons python libssl-dev libcurl4-openssl-dev libboost-sys
 ENV FREELAN_BRANCH=master CXX=g++
 WORKDIR /opt/
 
-RUN apt-get install -y $DEPENDENCIES && apt-get install -y $BUILD_DEPENDENCIES &&\
+RUN apt-get update && apt-get install -y $DEPENDENCIES && apt-get install -y $BUILD_DEPENDENCIES &&\
     git clone https://github.com/freelan-developers/freelan.git /opt/freelan &&\
     cd /opt/freelan &&\ 
     git checkout $FREELAN_BRANCH &&\
