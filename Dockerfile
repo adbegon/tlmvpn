@@ -12,8 +12,8 @@ ENV FREELAN_BRANCH master
 WORKDIR /opt/
 
 RUN apt-get install -y $DEPENDENCIES $BUILD_DEPENDENCIES && \
-    git clone https://github.com/freelan-developers/freelan.git &&\
-    cd freelan && git checkout $FREELAN_BRANCH &&\
+    git clone https://github.com/freelan-developers/freelan.git /opt/freelan &&\
+    cd /opt/freelan && git checkout $FREELAN_BRANCH &&\
     apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
