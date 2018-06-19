@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y $DEPENDENCIES && apt-get install -y $BU
     apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
-# Profit !
+# Profit !!
 EXPOSE 12000/udp 12000/tcp
 
 CMD ["/bin/freelan", "-f", "--tap_adapter.enabled=off", "--switch.relay_mode_enabled=yes"]
