@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:stretch-slim
 
 # Update package list
 RUN apt-get update
@@ -22,13 +22,16 @@ RUN apt-get install -y $DEPENDENCIES && apt-get install -y $BUILD_DEPENDENCIES &
 RUN cd /opt/freelan &&\
     scons apps &&\
     scons samples &&\
-    scons install prefix=/usr/ &&\
-    # rm -rf /opt/freelan &&\
-    # apt-get autoremove -y --purge $BUILD_DEPENDENCIES &&\
+    # scons install prefix=/opt/ --upnp=yes --install-sandbox=/tlm/freelan
+    scons install prefix=/usr/local/ &&\
+    cp -r /opt/freelan/build/release/bin /opt/tlm &&\
+    ln -s /opt/tlm/freelan /bin/freelan &&\
+    rm -rf /opt/freelan &&\
+    apt-get autoremove -y --purge $BUILD_DEPENDENCIES &&\
     apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # Profit !
 EXPOSE 12000/udp 12000/tcp
 
-CMD ["/usr/bin/freelan", "-f", "--tap_adapter.enabled=off", "--switch.relay_mode_enabled=yes"]
+CMD ["/bin/freelan", "-f", "--tap_adapter.enabled=off", "--switch.relay_mode_enabled=yes"]
