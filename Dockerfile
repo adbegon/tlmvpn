@@ -20,10 +20,10 @@ RUN apt-get install -y $DEPENDENCIES $BUILD_DEPENDENCIES && \
 # Compile FreeLAN
 # Remove sources and dependencies
 ENV CXX=g++
-RUN cd freelan && scons install prefix=/usr/ &&\
-    rm -r freelan &&\
+RUN cd /opt/freelan && scons install prefix=/usr/ &&\
+    rm -rf /opt/freelan &&\
     apt-get autoremove -y --purge $BUILD_DEPENDENCIES &&\
-    apt-get clean &&\
+    apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # Profit !
