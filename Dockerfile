@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:stretch
 
 # Update package list
 RUN apt-get update
@@ -6,7 +6,7 @@ RUN apt-get update
 
 # Install dependencies
 ENV DEPENDENCIES libssl1.1 libboost-system1.62.0 libboost-thread1.62.0 libboost-filesystem1.62.0 libboost-date-time1.62.0 libboost-program-options1.62.0 libboost-iostreams1.62.0 libcurl4-openssl-dev libminiupnpc10
-ENV BUILD_DEPENDENCIES g++ git scons libssl-dev libboost-system-dev  libboost-thread-dev libboost-filesystem-dev libboost-date-time-dev libboost-program-options-dev libboost-iostreams-dev libminiupnpc-dev
+ENV BUILD_DEPENDENCIES scons python libssl-dev libcurl4-openssl-dev libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-filesystem-dev libboost-iostreams-dev libminiupnpc-dev build-essential
 # Get FreeLAN sources
 # Compile FreeLAN
 # Remove sources and dependencies
@@ -24,7 +24,7 @@ RUN cd /opt/freelan &&\
     scons samples &&\
     scons install prefix=/usr/ &&\
     # rm -rf /opt/freelan &&\
-    apt-get autoremove -y --purge $BUILD_DEPENDENCIES &&\
+    # apt-get autoremove -y --purge $BUILD_DEPENDENCIES &&\
     apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
