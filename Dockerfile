@@ -1,4 +1,4 @@
-FROM debian:stretch:slim
+FROM debian:stretch-slim
 
 # Update package list
 RUN apt-get update
