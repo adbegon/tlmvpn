@@ -17,11 +17,13 @@ RUN apt-get install -y $DEPENDENCIES && apt-get install -y $BUILD_DEPENDENCIES &
     git clone https://github.com/freelan-developers/freelan.git /opt/freelan &&\
     cd /opt/freelan &&\ 
     git checkout $FREELAN_BRANCH &&\
-    cd /opt/freelan &&\
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
+RUN cd /opt/freelan &&\
     scons apps &&\
     scons samples &&\
     scons install prefix=/usr/ &&\
-    rm -rf /opt/freelan &&\
+    # rm -rf /opt/freelan &&\
     apt-get autoremove -y --purge $BUILD_DEPENDENCIES &&\
     apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
