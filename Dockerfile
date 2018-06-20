@@ -2,6 +2,7 @@ FROM debian:stretch-slim
 
 # Update package list
 RUN apt-get update && apt-get -y upgrade &&\
+    mkdir /etc/freelan &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 
@@ -10,6 +11,7 @@ ENV BUILD_DEPENDENCIES scons python libssl-dev libcurl4-openssl-dev libboost-sys
 ENV FREELAN_BRANCH=master CXX=g++
 WORKDIR /opt/
     # Install dependencies
+ADD ./files/freelan.cfg /etc/freelan/    
 RUN apt-get update && apt-get install -y $DEPENDENCIES && apt-get install -y $BUILD_DEPENDENCIES &&\
     # Get FreeLAN sources
     git clone https://github.com/freelan-developers/freelan.git /opt/freelan &&\
@@ -26,7 +28,7 @@ RUN apt-get update && apt-get install -y $DEPENDENCIES && apt-get install -y $BU
     rm -rf /opt/freelan &&\
     # Remove sources and dependencies
     apt-get autoremove -y --purge $BUILD_DEPENDENCIES &&\
-    apt-get autoclean &&\
+    apt-get autoremove && apt-get autoclean &&\
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # Profit !!
