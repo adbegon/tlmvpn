@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM quay.io/spivegin/tlmbasedebian
 
 # Update package list
 RUN apt-get update && apt-get -y upgrade &&\
